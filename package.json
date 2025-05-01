@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "1.0.0",
   "private": true,
-  "author": "粥里有勺糖",
+  "author": "相甫",
   "license": "MIT",
   "scripts": {
     "dev": "vitepress dev docs",
@@ -19,6 +19,7 @@
     "doc": "docs"
   },
   "devDependencies": {
+    "@types/node": "^22.15.3",
     "pagefind": "^1.3.0",
     "sass": "^1.76.0",
     "typescript": "^5.4.5",

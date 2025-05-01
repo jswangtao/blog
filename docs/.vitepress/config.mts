@@ -15,8 +15,8 @@ export default defineConfig({
   extends: blogTheme,
   base,
   lang: "zh-cn",
-  title: "@sugarat/theme",
-  description: "粥里有勺糖的博客主题，基于 vitepress 实现",
+  title: "相甫",
+  description: "相甫的博客主题，基于 vitepress 实现",
   lastUpdated: true,
   // 详见：https://vitepress.dev/zh/reference/site-config#head
   head: [
@@ -43,12 +43,15 @@ export default defineConfig({
     // },
     nav: [
       { text: "首页", link: "/" },
-      { text: "关于作者", link: "https://sugarat.top/aboutme.html" },
+      {
+        text: "后端",
+        items: [{ text: "Nginx", link: "/back-end/nginx/" }],
+      },
     ],
     socialLinks: [
       {
         icon: "github",
-        link: "https://github.com/ATQQ/sugar-blog/tree/master/packages/theme",
+        link: "https://github.com/jswangtao",
       },
     ],
   },
