@@ -47,6 +47,10 @@ export default defineConfig({
         text: "后端",
         items: [{ text: "Nginx", link: "/back-end/nginx/" }],
       },
+      {
+        text: "面试",
+        items: [{ text: "leetcode", link: "/interview/leetcode/" }],
+      },
     ],
     socialLinks: [
       {

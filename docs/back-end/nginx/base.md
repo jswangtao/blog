@@ -12,7 +12,6 @@ categories:
 # Nginx 极简教程
 
 > 本项目是一个 Nginx 极简教程，目的在于帮助新手快速入门 Nginx。
-> ![随机图片](http://api.nmb.show/xiaojiejie1.php)
 
 ## 一、Nginx 简介
 
