@@ -1,7 +1,6 @@
 ---
 title: Nginx 基础
-isTimeLine: true
-date: 2025-05-01
+
 tags:
   - 后端
   - Nginx

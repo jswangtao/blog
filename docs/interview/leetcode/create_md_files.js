@@ -10,8 +10,8 @@ files.forEach((file) => {
     const mdFileName = `${baseName}.md`;
     const mdContent = `---
 title: ${baseName}
-isTimeLine: true
-date: 2025-05-01
+
+
 tags:
   - leetcode
 categories:
