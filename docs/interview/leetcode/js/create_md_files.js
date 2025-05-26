@@ -18,7 +18,7 @@ categories:
   - leetcode
 ---
 
-<<< ./${file}
+<<< ./js/${file}
 `;
 
     fs.writeFileSync(path.join(leetcodeDir, mdFileName), mdContent);
