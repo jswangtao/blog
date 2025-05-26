@@ -44,12 +44,16 @@ export default defineConfig({
     nav: [
       { text: "首页", link: "/" },
       {
-        text: "后端",
-        items: [{ text: "Nginx", link: "/back-end/nginx/" }],
+        text: "技术笔记",
+        items: [{ text: "技术随笔", link: "/tech/essay/" }],
       },
       {
         text: "面试",
         items: [{ text: "leetcode", link: "/interview/leetcode/" }],
+      },
+      {
+        text: "后端",
+        items: [{ text: "Nginx", link: "/back-end/nginx/" }],
       },
     ],
     socialLinks: [
