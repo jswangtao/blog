@@ -58,6 +58,11 @@ const blogTheme = getThemeConfig({
     },
   ],
 
+  // 推荐文章
+  recommend: {
+    showNum: false,
+  },
+
   // 公告
   // popover: {
   //   title: "公告",
