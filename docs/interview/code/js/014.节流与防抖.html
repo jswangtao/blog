@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function debunce(fn, wait) {
+        let timer = null;
+        return function () {
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+          }, wait);
+        };
+      }
+      function throttle(fn, delay) {
+        let timer = null;
+        return function () {
+          if (!timer) {
+            fn.apply(this, arguments);
+            timer = setTimeout(() => {
+              clearTimeout(timer);
+              timer = null;
+            }, delay);
+          }
+        };
+      }
+    </script>
+    <button onclick="debunceClick('防抖测试')">防抖</button>
+    <button onclick="throttleClick('节流测试')">节流</button>
+    <script>
+      function testDunce(val) {
+        console.log("🚀🚀🚀wimi======>>>防抖", val);
+      }
+
+      let debunceClick = debunce(testDunce, 1000);
+
+      function testThrottle(val) {
+        console.log("🚀🚀🚀wimi======>>>节流", val);
+      }
+
+      let throttleClick = throttle(testThrottle, 1000);
+    </script>
+  </body>
+</html>

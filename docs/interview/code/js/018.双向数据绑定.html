@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="myInput" />
+    <span id="mySpan"></span>
+    <script>
+      const myInput = document.getElementById("myInput");
+      const mySpan = document.getElementById("mySpan");
+      let obj = {};
+
+      Object.defineProperty(obj, "text", {
+        configurable: "true",
+        enumerable: "true",
+        get() {
+          console.log("🚀🚀🚀wimi======>>>获取了数据");
+        },
+        set(newValue) {
+          console.log("🚀🚀🚀wimi======>>>数据更新了");
+          myInput.value = newValue;
+          mySpan.innerText = newValue;
+        },
+      });
+
+      // obj = new Proxy(
+      //   {},
+      //   {
+      //     get(o, prop) {
+      //       console.log("🚀🚀🚀wimi======>>>获取了数据");
+      //     },
+      //     set(o, prop, newValue) {
+      //       console.log("🚀🚀🚀wimi======>>>数据更新了");
+      //       myInput.value = newValue;
+      //       mySpan.innerText = newValue;
+      //     },
+      //   }
+      // );
+
+      myInput.addEventListener("input", (e) => {
+        obj.text = e.target.value;
+      });
+    </script>
+  </body>
+</html>

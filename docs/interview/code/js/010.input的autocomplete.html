@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="autocom" placeholder="autocomplete输入框" />
+    <ul id="match"></ul>
+    <script>
+      var arr = [
+        "a",
+        "apple",
+        "abandon",
+        "bilibili",
+        "beep",
+        "before",
+        "become",
+        "being",
+        "highmaintains",
+        "by",
+        "bye",
+        "banana",
+      ];
+
+      const autocomDom = document.getElementById("autocom");
+
+      autocomDom.addEventListener("input", (event) => {
+        var v1 = event.target.value.trim();
+        console.log("🚀🚀🚀wimi======>>>v1", v1);
+        if (v1) {
+          autoFunc(v1, arr);
+        } else {
+          document.getElementById("match").innerHTML = "";
+        }
+      });
+
+      //判断是否匹配并显示在li中
+      function autoFunc(str, arr) {
+        const list = [];
+        arr.forEach((element) => {
+          if (element.startsWith(str, 0)) {
+            list.push("<li>" + element + "</li>");
+          }
+        });
+        document.getElementById("match").innerHTML = list.join("");
+      }
+
+      //将匹配的选项添加到输入框中
+      document.getElementById("match").addEventListener("click", (e) => {
+        if (e.target.tagName.toLowerCase() === "li") {
+          addToInput(e.target);
+          document.getElementById("match").innerHTML = "";
+        }
+      });
+      function addToInput(li) {
+        autocomDom.value = li.innerText;
+      }
+    </script>
+  </body>
+</html>

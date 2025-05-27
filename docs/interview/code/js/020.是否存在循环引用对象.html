@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function isCycleObject(obj, parant) {
+        let parantArr = parant || [obj];
+        let flag = false;
+        for (let i in obj) {
+          if (typeof obj[i] === "object") {
+            parantArr.forEach((pObj) => {
+              if (pObj === obj[i]) {
+                flag = true;
+              }
+              if (flag) {
+                console.log("🚀🚀🚀wimi======>>>出现循环引用对象");
+                return true;
+              }
+              flag = isCycleObject(obj[i], [...parantArr, obj[i]]);
+              if (flag) {
+                console.log("🚀🚀🚀wimi======>>>出现循环引用对象");
+                return true;
+              }
+            });
+          }
+        }
+        return flag;
+      }
+
+      // let stack = []; // 存在对象中已经出现的对象
+
+      // /**
+      //  * @params {Object} obj 需要检查的对象
+      //  */
+      // function checkObjCircularReference(obj) {
+      //   for (let i = 0, len = stack.length; i < len; i++) {
+      //     if (stack[i] === obj) {
+      //       // 出现重复的对象
+      //       console.log("found CircularReference");
+      //       throw TypeError();
+      //     }
+      //   }
+      //   stack.push(obj);
+      //   for (let key in obj) {
+      //     let value = obj[key];
+      //     if (typeof value === "object") {
+      //       // 对象类型去检查
+      //       checkObjCircularReference(value);
+      //     }
+      //   }
+      //   // 检查结束
+      //   console.log("not found CircularReference");
+      //   stack = [];
+      // }
+
+      let obj = { a: 1 };
+      obj.b = obj;
+      console.log("🚀🚀🚀wimi======>>>obj", obj);
+      console.log("🚀🚀🚀wimi======>>>", isCycleObject(obj));
+    </script>
+  </body>
+</html>
