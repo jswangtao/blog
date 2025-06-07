@@ -204,7 +204,7 @@ views下面做三个基础的文件，在加上
 ```
 运行，可以看到跳转
 
-## 2.添加状态管理pinia
+## 3.添加状态管理pinia
 ```
 pnpm add pinia
 ```
@@ -290,3 +290,238 @@ const demoStore = useDemoStore();
 </script>
 ```
 ![image.png](https://cdn.jsdelivr.net/gh/jswangtao/imgsbed/posts/20250530170133.png)
+
+## 4. 添加UI组件库 vant
+```bash
+pnpm add vant
+pnpm add @vant/auto-import-resolver unplugin-vue-components unplugin-auto-import -D
+```
+在vite.config.ts中添加
+```js
+import AutoImport from "unplugin-auto-import/vite";
+
+import Components from "unplugin-vue-components/vite";
+
+import { VantResolver } from "@vant/auto-import-resolver";
+----
+
+
+plugins: [
+---
+
+AutoImport({
+
+dts: "src/types/auto-imports.d.ts",
+
+resolvers: [VantResolver()],
+
+}),
+
+Components({
+
+dts: "src/types/components.d.ts",
+
+resolvers: [VantResolver()],
+
+}),
+---
+
+],
+```
+利用自动导入方法和自动组件注册，这样就可以无须手动导入，直接使用
+
+## 5. 添加移动端适配方案和各种样式
+```
+pnpm add postcss-px-to-viewport-8-plugin -D
+```
+添加配置文件postcss.config.cjs
+```js
+module.exports = () => {
+
+return {
+
+plugins: {
+
+"postcss-px-to-viewport-8-plugin": {
+
+unitToConvert: "px", // 需要转换的单位，默认为"px"
+
+// viewportWidth: 375, // 设计稿的视口宽度
+
+viewportWidth: function (file) {
+
+return file && file.includes("node_modules/vant") ? 375 : 750;
+
+},
+
+unitPrecision: 5, // 单位转换后保留的精度
+
+propList: ["*"], // 能转化为vw的属性列表,!font-size表示font-size后面的单位不会被转换
+
+viewportUnit: "vw", // 希望使用的视口单位
+
+fontViewportUnit: "vw", // 字体使用的视口单位
+
+// 需要忽略的CSS选择器，不会转为视口单位，使用原有的px等单位。
+
+// 下面配置表示类名中含有'keep-px'都不会被转换
+
+selectorBlackList: ["keep-px"],
+
+minPixelValue: 1, // 设置最小的转换数值，如果为1的话，只有大于1的值会被转换
+
+mediaQuery: false, // 媒体查询里的单位是否需要转换单位
+
+replace: true, // 是否直接更换属性值，而不添加备用属性
+
+// exclude: [/node_modules/], // 忽略某些文件夹下的文件或特定文件，例如 'node_modules' 下的文件
+
+include: [/src/], // 如果设置了include，那将只有匹配到的文件才会被转换
+
+landscape: false, // 是否添加根据 landscapeWidth 生成的媒体查询条件 @media (orientation: landscape)
+
+landscapeUnit: "vw", // 横屏时使用的单位
+
+landscapeWidth: 1338, // 横屏时使用的视口宽度
+
+},
+
+},
+
+};
+
+};
+```
+
+添加less,unocss,normalize.css
+```
+pnpm add normalize.css
+pnpm add less unocss -D
+```
+在main.js中添加
+```js
+
+---
+
+// normalize.css
+
+import "normalize.css/normalize.css";
+
+// 全局样式
+
+import "@/styles/index.less";
+
+// 引入unocss css
+
+import "@/plugins/unocss";
+
+---
+
+```
+复制src/styles目录
+![image.png](https://cdn.jsdelivr.net/gh/jswangtao/imgsbed/posts/20250602153739.png)
+
+vite.config.js
+中添加
+```js
+import UnoCSS from "unocss/vite";
+
+plugins: [
+
+---
+	UnoCSS(),
+---
+],
+```
+添加uno.config.ts
+
+## 6. 添加路由缓存
+
+添加文件stores/modules/cached-view.ts
+```js
+import { defineStore } from "pinia";
+
+import { store } from "@/store";
+
+import type { toRouteType } from "@/router";
+
+  
+
+export const useCachedViewStore = defineStore({
+
+id: "cached-view",
+
+state: () => ({
+
+// 缓存页面 keepAlive
+
+cachedViewList: [] as string[]
+
+}),
+
+actions: {
+
+addCachedView(view: toRouteType) {
+
+// 不重复添加
+
+if (this.cachedViewList.includes(view.name as string)) return;
+
+if (!view?.meta?.noCache) {
+
+this.cachedViewList.push(view.name as string);
+
+}
+
+},
+
+delCachedView(view: toRouteType) {
+
+const index = this.cachedViewList.indexOf(view.name as string);
+
+if (index > -1) {
+
+this.cachedViewList.splice(index, 1);
+
+}
+
+},
+
+delAllCachedViews() {
+
+this.cachedViewList = [] as string[];
+
+}
+
+}
+
+});
+
+  
+
+export function useCachedViewStoreHook() {
+
+return useCachedViewStore(store);
+
+}
+```
+在router/index.ts中添加
+```js
+router.beforeEach((to: toRouteType, from, next) => {
+----
+// 路由缓存
+
+useCachedViewStoreHook().addCachedView(to);
+-----
+next();
+
+});
+```
+在layout中添加keep-alive
+```js
+<keep-alive :include="cachedViews">
+
+<component :is="Component" />
+
+</keep-alive>
+```
