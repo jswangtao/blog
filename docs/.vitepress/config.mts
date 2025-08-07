@@ -54,6 +54,7 @@ export default defineConfig({
           { text: "手撕代码", link: "/interview/code/" },
           { text: "八股文", link: "/interview/base/" },
           { text: "项目", link: "/interview/project/" },
+          { text: "背调", link: "/interview/background/" },
         ],
       },
       {

@@ -5,6 +5,7 @@
   "author": "相甫",
   "license": "MIT",
   "scripts": {
+    "start": "npm run dev",
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs"
