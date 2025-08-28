@@ -55,6 +55,7 @@ export default defineConfig({
           { text: "八股文", link: "/interview/base/" },
           { text: "项目", link: "/interview/project/" },
           { text: "背调", link: "/interview/background/" },
+          { text: "模拟题", link: "/interview/problem/" },
         ],
       },
       {
