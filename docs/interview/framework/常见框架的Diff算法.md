@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 谈谈React和Vue的区别
+title: 常见框架的 Diff 算法
 tags:
   - 面试
   - 基础
@@ -8,4 +8,4 @@ categories:
   - 面试
 ---
 
-# 谈谈 React 和 Vue 的区别
+# 常见框架的 Diff 算法

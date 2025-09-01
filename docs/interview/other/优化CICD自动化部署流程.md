@@ -1,6 +1,6 @@
 ---
 isTimeLine: true
-title: 谈谈React和Vue的区别
+title: 优化CICD自动化部署流程
 tags:
   - 面试
   - 基础
@@ -8,4 +8,4 @@ categories:
   - 面试
 ---
 
-# 谈谈 React 和 Vue 的区别
+# 优化 CICD 自动化部署流程
