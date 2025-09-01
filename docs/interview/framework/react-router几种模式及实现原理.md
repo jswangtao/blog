@@ -1,5 +1,4 @@
 ---
-isTimeLine: true
 title: react-router几种模式及实现原理
 tags:
   - 面试

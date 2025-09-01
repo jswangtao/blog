@@ -1,5 +1,4 @@
 ---
-isTimeLine: true
 title: 常见框架的 Diff 算法
 tags:
   - 面试

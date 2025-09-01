@@ -1,5 +1,4 @@
 ---
-isTimeLine: true
 title: TypeScript 中的 Interface 和 Type Alias
 tags:
   - 面试

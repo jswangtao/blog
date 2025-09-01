@@ -1,5 +1,4 @@
 ---
-isTimeLine: true
 title: 谈谈React和Vue的区别
 tags:
   - 面试

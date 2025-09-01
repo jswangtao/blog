@@ -1,5 +1,4 @@
 ---
-isTimeLine: true
 title: ReactFiber的作用和原理
 tags:
   - 面试
